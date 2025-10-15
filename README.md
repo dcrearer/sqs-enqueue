@@ -4,12 +4,6 @@ A simple CLI tool to send messages to Amazon SQS queues.
 
 ## Usage
 
-```bash
-sqs-enqueue [OPTIONS] <QUEUE> <MESSAGE>
-```
-
-## Arguments
-```
 Usage: sqs-enqueue [OPTIONS] --queue <QUEUE>
 
 Options:
@@ -20,13 +14,13 @@ Options:
 -i, --id <ID>            FIFO queues, organizes messages into distinct groups. Standard queues, enables fair queues [default: sqs-enqueue]
 -h, --help               Print help
 -V, --version            Print version
-```
+
 
 ## Examples
 
 ```bash
-# Send a simple message
-sqs-enqueue https://sqs.us-east-1.amazonaws.com/123456789012/my-queue "Hello World"
+# Send default message
+sqs-enqueue --queue https://sqs.us-east-1.amazonaws.com/123456789012/my-queue 
 
 # Send with delay and custom region
 sqs-enqueue -r us-west-2 -d 30 https://sqs.us-west-2.amazonaws.com/123456789012/my-queue "Delayed message"
@@ -35,7 +29,7 @@ sqs-enqueue -r us-west-2 -d 30 https://sqs.us-west-2.amazonaws.com/123456789012/
 ## Requirements
 
 - AWS credentials configured (via AWS CLI, environment variables, or IAM roles)
-- Rust 1.70+ for building from source
+- Rust 1.90.0 used to build
 
 ## Installation
 
