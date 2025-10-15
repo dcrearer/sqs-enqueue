@@ -2,20 +2,6 @@
 
 A simple CLI tool to send messages to Amazon SQS queues.
 
-## Usage
-
-Usage: sqs-enqueue [OPTIONS] --queue <QUEUE>
-
-Options:
--q, --queue <QUEUE>      URL of the Amazon SQS queue to which a message is sent
--r, --region <REGION>    AWS region for the SQS queue [default: us-east-1]
--m, --message <MESSAGE>  Message to send. The minimum size is one character. The maximum size is 1 MiB or 1,048,576 bytes [default: "{default: data}"]
--d, --delay <DELAY>      Length of time, in seconds to delay a specific message [default: 0]
--i, --id <ID>            FIFO queues, organizes messages into distinct groups. Standard queues, enables fair queues [default: sqs-enqueue]
--h, --help               Print help
--V, --version            Print version
-
-
 ## Examples
 
 ```bash
