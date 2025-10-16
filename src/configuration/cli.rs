@@ -36,6 +36,7 @@ impl Args {
         if args.message.is_empty() || args.message.len() > MAXIMUM_MESSAGE_BODY {
             return Err("Message cannot be empty or exceed 1 MiB (1,048,576 bytes)".to_string());
         }
+
         Ok(args)
     }
 }

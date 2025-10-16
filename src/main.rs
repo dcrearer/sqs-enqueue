@@ -1,10 +1,5 @@
-use aws_config::BehaviorVersion;
-use aws_sdk_sqs::{Client, config::Region};
 use sqs_enqueue::configuration::Args;
-// use std::collections::HashMap;
-use aws_sdk_sqs::types::MessageAttributeValue;
-// use aws_sdk_sqs::types::{MessageSystemAttributeNameForSends, MessageSystemAttributeValue};
-
+use sqs_enqueue::messaging::{create_client, send_message};
 
 #[tokio::main]
 async fn main() -> Result<(), aws_sdk_sqs::Error> {
@@ -18,26 +13,8 @@ async fn main() -> Result<(), aws_sdk_sqs::Error> {
         }
     };
 
-    let config = aws_config::defaults(BehaviorVersion::latest())
-        .region(Region::new(args.region))
-        .load()
-        .await;
-
-    let attr = MessageAttributeValue::builder()
-        .string_value("high")
-        .data_type("String")
-        .build()?;
-
-    let client = Client::new(&config);
-    let _ = client
-        .send_message()
-        .queue_url(args.queue)
-        .message_body(args.message)
-        .delay_seconds(args.delay)
-        .message_group_id(args.id)
-        .message_attributes("priority", attr)
-        .send()
-        .await?;
+    let client = create_client(args.region.clone()).await;
+    send_message(&client, args).await?;
 
     Ok(())
 }
